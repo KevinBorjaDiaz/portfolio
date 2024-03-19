@@ -1,0 +1,41 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" integrity="sha512-mG7Xo6XLlQ13JGPQLgLxI7bz8QlErrsE9rYQDRgF+6AlQHm9Tn5bh/vaIKxBmM9mULPC6yizAhEmKyGgNHCIvg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style type="text/css">
+  .navbar { margin: 0; }
+ </style>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">abrir cerrar</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#">Kevin Borja Diaz</a>
+      </div>
+  
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li [ngClass]="{'active': activado === 'inicio' }"><a href="#" (click)="onSelect('inicio')"> Inicio<span class="sr-only"></span></a></li>
+          <li [ngClass]="{'active': activado === 'proyectos' }"><a href="#" (click)="onSelect('proyectos')"> Proyectos </a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li [ngClass]="{'active': activado === 'conoceme' }"><a href="#" (click)="onSelect('conoceme')"> Conoceme</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li [ngClass]="{'active': activado === 'contacto' }"><a href="#" (click)="onSelect('contacto')"> Contacto</a></li>
+              <li role="separator" class="divider"></li>
+              <li [ngClass]="{'active': activado === 'cv' }"><a href="#" (click)="onSelect('cv')"> CV</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
