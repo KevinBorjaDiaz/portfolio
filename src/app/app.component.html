@@ -1,11 +1,11 @@
-<app-header (Seccion)="onNavegar($event)"></app-header> <!--navbar-->
+<head>
+    <link rel="stylesheet" href="./app.component.css">
+</head>
 
-<div class="container">
-    <app-inicio *ngIf = " Seccion === 'inicio' "></app-inicio>
-    <app-proyectos *ngIf = " Seccion === 'proyectos' "></app-proyectos>
-    <app-cv *ngIf = " Seccion === 'cv' "></app-cv>
-    <app-conoceme *ngIf = " Seccion === 'conoceme' "></app-conoceme>
-    <app-contacto *ngIf = " Seccion === 'contacto' "></app-contacto>
+<app-header></app-header> <!--navbar-->
+
+<div class="contenedor">
+    <router-outlet></router-outlet>
 </div>
 
 <app-footer></app-footer> <!--footer-->
