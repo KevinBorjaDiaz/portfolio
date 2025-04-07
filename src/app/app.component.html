@@ -1,11 +1,11 @@
-<head>
-    <link rel="stylesheet" href="./app.component.css">
-</head>
+<link rel="stylesheet" href="./app.component.css">
 
-<app-header></app-header> <!--navbar-->
-
-<div class="contenedor">
-    <router-outlet></router-outlet>
+<div class="d-flex flex-column justify-content-between" style="height:100vh">
+    <app-header></app-header> <!--navbar-->
+    
+    <div style="margin: 0 10vw">
+        <router-outlet></router-outlet>
+    </div>
+    
+    <app-footer></app-footer> <!--footer-->
 </div>
-
-<app-footer></app-footer> <!--footer-->
