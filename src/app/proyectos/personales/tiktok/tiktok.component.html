@@ -1,0 +1,38 @@
+<div class="d-flex flex-column align-content-center flex-wrap">
+  <input
+    type="text"
+    placeholder="Insert Sum URL"
+    id="tikitakURL"
+    (paste)="onPasteHandler($event)"
+    autocomplete="off"
+  />
+  <blockquote style="align-self: center">
+    <iframe
+      [attr.src]="srcURL"
+      width="325"
+      height="575"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </blockquote>
+  <input type="text" [value]="srcURL" hidden id="URLConverted" />
+  <button
+    type="button"
+    class="btn btn-primary m-2"
+    style="width: 100%"
+    (click)="copyURL()"
+    *ngIf="displayBtn"
+  >
+    Copy URL
+  </button>
+  <a [href]="srcURL" style="width: 100%" class="m-2">
+    <button
+      type="button"
+      style="width: 100%"
+      class="btn btn-primary"
+      *ngIf="displayBtn"
+    >
+      Go to URL
+    </button>
+  </a>
+</div>

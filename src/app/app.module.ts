@@ -12,6 +12,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PersonalesComponent } from './proyectos/personales/personales.component';
 import { EscolaresComponent } from './proyectos/escolares/escolares.component';
+import { TiktokComponent } from './proyectos/personales/tiktok/tiktok.component';
 
 const appRoutes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'proyectos/personales', component: PersonalesComponent },
   { path: 'proyectos/escolares', component: EscolaresComponent },
+  { path: 'proyectos/personales/tiktok', component: TiktokComponent },
 ];
 
 @NgModule({
@@ -35,8 +37,10 @@ const appRoutes: Routes = [
     ContactoComponent,
     PersonalesComponent,
     EscolaresComponent,
+    TiktokComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
+  imports: [BrowserModule, RouterModule.forRoot(appRoutes, { useHash: true })],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent],
 })
