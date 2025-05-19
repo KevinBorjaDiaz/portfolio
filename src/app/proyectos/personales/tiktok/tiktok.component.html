@@ -1,11 +1,17 @@
-<div class="d-flex flex-column align-content-center flex-wrap">
-  <input
-    type="text"
-    placeholder="Insert Sum URL"
-    id="tikitakURL"
-    (paste)="onPasteHandler($event)"
-    autocomplete="off"
-  />
+<div class="d-flex flex-column align-items-center flex-wrap">
+  <form #tikitakForm="ngForm" (ngSubmit)="onSubmitHandler(tikitakForm)">
+    <input
+      type="text"
+      placeholder="Insert Sum URL"
+      id="tikitakURL"
+      name="tikitakURL"
+      autocomplete="off"
+      (paste)="onPasteHandler($event)"
+      ngModel
+    />
+    <button type="submit">Go</button>
+  </form>
+
   <blockquote style="align-self: center">
     <iframe
       [attr.src]="srcURL"

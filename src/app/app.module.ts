@@ -13,6 +13,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PersonalesComponent } from './proyectos/personales/personales.component';
 import { EscolaresComponent } from './proyectos/escolares/escolares.component';
 import { TiktokComponent } from './proyectos/personales/tiktok/tiktok.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -39,7 +40,11 @@ const appRoutes: Routes = [
     EscolaresComponent,
     TiktokComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes, { useHash: true })],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    RouterModule.forRoot(appRoutes, { useHash: true }),
+  ],
   exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent],
