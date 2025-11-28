@@ -50,14 +50,12 @@ button p {
     rgba(242, 109, 109, 0.6),
     rgba(242, 109, 109, 0.6)
   );
-  /* ,url("../../assets/uni.jpg"); */
 }
 .right {
   background-image: linear-gradient(
     rgba(109, 179, 242, 0.6),
     rgba(109, 179, 242, 0.6)
   );
-  /* ,url("../../assets/criat.jpg"); */
 }
 
 @media (max-width: 768px) {

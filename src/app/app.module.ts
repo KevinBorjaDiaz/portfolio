@@ -10,9 +10,7 @@ import { CvComponent } from './cv/cv.component';
 import { ConocemeComponent } from './conoceme/conoceme.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { Routes, RouterModule } from '@angular/router';
-import { PersonalesComponent } from './proyectos/personales/personales.component';
-import { EscolaresComponent } from './proyectos/escolares/escolares.component';
-import { TiktokComponent } from './proyectos/personales/tiktok/tiktok.component';
+import { TiktokComponent } from './proyectos/tiktok/tiktok.component';
 import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
@@ -21,9 +19,7 @@ const appRoutes: Routes = [
   { path: 'conoceme', component: ConocemeComponent },
   { path: 'cv', component: CvComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'proyectos/personales', component: PersonalesComponent },
-  { path: 'proyectos/escolares', component: EscolaresComponent },
-  { path: 'proyectos/personales/tiktok', component: TiktokComponent },
+  { path: 'proyectos/tiktok', component: TiktokComponent },
 ];
 
 @NgModule({
@@ -36,8 +32,6 @@ const appRoutes: Routes = [
     CvComponent,
     ConocemeComponent,
     ContactoComponent,
-    PersonalesComponent,
-    EscolaresComponent,
     TiktokComponent,
   ],
   imports: [
