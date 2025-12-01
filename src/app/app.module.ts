@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -9,17 +11,19 @@ import { ProyectosComponent } from './proyectos/proyectos.component';
 import { CvComponent } from './cv/cv.component';
 import { ConocemeComponent } from './conoceme/conoceme.component';
 import { ContactoComponent } from './contacto/contacto.component';
-import { Routes, RouterModule } from '@angular/router';
 import { TiktokComponent } from './proyectos/tiktok/tiktok.component';
-import { FormsModule } from '@angular/forms';
+import { WordleComponent } from './proyectos/wordle/wordle.component';
 
 const appRoutes: Routes = [
   { path: 'inicio', component: InicioComponent },
+
   { path: 'proyectos', component: ProyectosComponent },
+  { path: 'proyectos/tiktok', component: TiktokComponent },
+  { path: 'proyectos/wordle', component: WordleComponent },
+
   { path: 'conoceme', component: ConocemeComponent },
   { path: 'cv', component: CvComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'proyectos/tiktok', component: TiktokComponent },
 ];
 
 @NgModule({
@@ -33,6 +37,7 @@ const appRoutes: Routes = [
     ConocemeComponent,
     ContactoComponent,
     TiktokComponent,
+    WordleComponent,
   ],
   imports: [
     FormsModule,

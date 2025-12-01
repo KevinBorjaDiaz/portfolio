@@ -5,7 +5,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-tiktok',
   templateUrl: './tiktok.component.html',
-  styleUrl: './tiktok.component.css',
   standalone: false,
 })
 export class TiktokComponent {

@@ -1,3 +1,14 @@
+<head>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="flecha" viewBox="0 0 448 512">
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+        </symbol>
+    </svg>
+</head>
+<div class="d-flex align-items-center mb-3 gap-3">
+    <a [routerLink]="['/proyectos']"><svg class="bi" width="24" height="24"><use xlink:href="#flecha"></use></svg></a>
+</div>
+
 <div *ngIf="errorMessage" class="alert alert-danger">
   {{ errorMessage }}
 </div>
@@ -16,34 +27,36 @@
     <button type="submit">Go</button>
   </form>
 
-  <blockquote style="align-self: center">
+  <blockquote>
     <iframe
       *ngIf="!errorMessage"
       [attr.src]="srcURL"
-      width="325"
+      width="100%"
       height="575"
       frameborder="0"
       allowfullscreen
     ></iframe>
-  </blockquote>
-  <input type="text" [value]="srcURL" hidden id="URLConverted" />
-  <button
-    type="button"
-    class="btn btn-primary m-2"
-    style="width: 100%"
-    (click)="copyURL()"
-    *ngIf="displayBtn"
-  >
-    Copy URL
-  </button>
-  <a [href]="srcURL" style="width: 100%" class="m-2">
+    
+    <input type="text" [value]="srcURL" hidden id="URLConverted" />
     <button
       type="button"
+      class="btn btn-primary m-2"
       style="width: 100%"
-      class="btn btn-primary"
+      (click)="copyURL()"
       *ngIf="displayBtn"
     >
-      Go to URL
+      Copy URL
     </button>
-  </a>
+    
+    <a [href]="srcURL" style="width: 100%" class="m-2">
+      <button
+        type="button"
+        style="width: 100%"
+        class="btn btn-primary"
+        *ngIf="displayBtn"
+      >
+        Go to URL
+      </button>
+    </a>
+  </blockquote>
 </div>

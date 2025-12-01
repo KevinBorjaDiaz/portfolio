@@ -1,0 +1,34 @@
+<head>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="flecha" viewBox="0 0 448 512">
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+        </symbol>
+    </svg>
+</head>
+<div [ngClass]="'d-flex align-items-center mb-3 gap-3'">
+    <a [routerLink]="['/proyectos']"><svg [ngClass]="'bi'" width="24" height="24"><use xlink:href="#flecha"></use></svg></a>
+</div>
+
+<div [ngClass]="'d-flex flex-column align-items-center'" style="max-width: 100%;">
+    <!-- Cells -->
+    <div *ngFor="let guess of guesses;" [ngClass]="'d-flex align-items-center w-100 justify-content-center'">
+        <div [ngClass]="'fs-0'" style="max-width:20%" *ngFor="let cell of guess">
+            <div [ngClass]="[cell.status, 'fs-0 wordCell d-flex justify-content-center align-content-center flex-wrap']"> <strong>{{cell.letter}}</strong></div>
+        </div>
+    </div>
+    <!-- Cells End -->
+    
+    <strong [ngClass]="'p-2'" style="color:red">{{errorMessage}}</strong>
+    
+    <!-- Keyboard -->
+    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow1" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> </div>
+    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow2" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> </div>
+    
+    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> 
+        <button id="enterButton" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onEnterClick()">{{buttonEnterText}}</button> 
+        <button *ngFor="let letter of lettersRow3" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> 
+        <button [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onDeleteClick()">⌫</button> 
+    </div>
+    <!-- Keyboard End -->
+</div>
+    
