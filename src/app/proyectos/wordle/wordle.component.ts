@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { fiveLetterWords_EN, sevenLetterWords_EN, fiveLetterWords_ES, sevenLetterWords_ES, } from './words';
 
 interface Cell {
   letter: string;
@@ -29,7 +30,7 @@ export class WordleComponent {
   errorMessage: string = '';
   buttonEnterText: string = 'ENTER';
 
-  @ViewChild('wordleInput') wordleInput: ElementRef<HTMLInputElement>;
+  language: string = 'EN';
 
   constructor() {
     this.initializeGuesses();
@@ -41,10 +42,6 @@ export class WordleComponent {
   }
 
   ngAfterViewInit() {
-    const el = this.wordleInput.nativeElement;
-    
-    el.focus();
-    el.addEventListener('focusout', () => { el.focus(); });
     window.addEventListener('keydown', (event) => this.onKeyDown(event));
   }
 
@@ -78,13 +75,13 @@ export class WordleComponent {
     this.guesses[this.currentGuess][this.currentColumn].letter = '';
   }
 
-  async onEnterClick(): Promise<void> {
+  onEnterClick(): void {
     if (this.currentColumn !== this.wordLength) {
       this.errorMessage = 'Not enough letters';
       return;
     }
     
-    const isCorrect = await this.checkGuess();
+    const isCorrect = this.checkGuess();
     
     if (isCorrect){
       alert(`Congratss!! you found the word ${this.targetWord}`);
@@ -105,14 +102,14 @@ export class WordleComponent {
     }
   }
 
-  async checkGuess(): Promise<boolean> {
+  checkGuess(): boolean {
     const currentWord = this.guesses[this.currentGuess];
     
         const guess = currentWord
     .map(cell => cell.letter)
     .join('');
     
-    const isValid = await this.validateWord(guess);
+    const isValid = this.validateWord(guess);
     
     if (!isValid) {
       this.errorMessage = 'Word not in dictionary';
@@ -121,13 +118,11 @@ export class WordleComponent {
     
     this.errorMessage = '';
     
-    if (guess === this.targetWord) {
+    if (guess == this.targetWord) {
       return true;
     }
     
     const targetLetters = this.targetWord.split('');
-    
-    //console.log(targetLetters);
     
     for (let i = 0; i < this.wordLength; i++) {
       currentWord[i].status = 'absent';
@@ -158,47 +153,24 @@ export class WordleComponent {
     this.buttonEnterText = window.innerWidth < 820 ? '↵' : 'ENTER';
   }
 
-  async validateWord(guess: string): Promise<boolean> {
-  
-    try{
-      const providedURL = `https://api.dictionaryapi.dev/api/v2/entries/en/${guess.toLowerCase()}`;
-      const response = await fetch(providedURL);
-
-      const data = await response.json();
-      const word = data[0]
-
-      if (!word || !word.meanings ) {
-        this.errorMessage = data.title || 'Word not in dictionary';
-        return false;
-      }
-
-    }catch(error){
-      console.error(error);
-      return false;
+  getWordList(): string[] {
+    if (this.language === 'EN') {
+      return this.wordLength === 5 ? fiveLetterWords_EN : sevenLetterWords_EN;
     }
 
-    return true;
+    if (this.language === 'ES') {
+      return this.wordLength === 5 ? fiveLetterWords_ES : sevenLetterWords_ES;
+    }
   }
 
-  async getRandomWord(): Promise<void> {
-    try {
-      const providedURL = 'https://random-word-api.herokuapp.com/word?length=5'
-      const response = await fetch(providedURL);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
+  validateWord(guess: string): boolean {
+    const wordList = this.getWordList();
+    return wordList.map(word => word.toUpperCase()).includes(guess.toUpperCase());
+  }
 
-      const word = await response.json();
-      
-      if (word && word.length > 0) {
-        this.targetWord = word[0].toUpperCase();
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    
-    this.targetWord = 'APPLE';
+  getRandomWord(): void {
+    const wordList = this.getWordList();
+    this.targetWord = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -220,5 +192,17 @@ export class WordleComponent {
         this.onLetterClick(key);
       }
     }
+  }
+
+  onLanguageChange(event: any): void {
+    const selectedLanguage = event.target.value;
+    this.language = selectedLanguage;
+    this.resetGame();
+  }
+
+  onLengthChange(event: any): void {
+    const selectedLength = parseInt(event.target.value);
+    this.wordLength = selectedLength;
+    this.resetGame();
   }
 }

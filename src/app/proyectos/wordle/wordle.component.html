@@ -22,7 +22,10 @@
     
     <!-- Keyboard -->
     <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow1" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> </div>
-    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow2" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> </div>
+    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> 
+        <button *ngFor="let letter of lettersRow2" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> 
+        <button *ngIf=" language=== 'ES'" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick('Ñ')">Ñ</button> 
+    </div>
     
     <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> 
         <button id="enterButton" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onEnterClick()">{{buttonEnterText}}</button> 
@@ -30,5 +33,19 @@
         <button [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onDeleteClick()">⌫</button> 
     </div>
     <!-- Keyboard End -->
+
+    <div [ngClass]="'d-flex justify-content-center align-items-center mt-3 gap-3'">
+        <strong [ngClass]="'p-2'">Language:</strong>
+        <select (change)="onLanguageChange($event)">
+            <option value="EN" [selected]="language === 'EN'">English</option>
+            <option value="ES" [selected]="language === 'ES'">Español</option>
+        </select>
+
+        <strong [ngClass]="'p-2'">Length:</strong>
+        <select (change)="onLengthChange($event)">
+            <option value="5" [selected]="wordLength === 5">5</option>
+            <option value="7" [selected]="wordLength === 7">7</option>
+        </select>
+    </div>
 </div>
     
