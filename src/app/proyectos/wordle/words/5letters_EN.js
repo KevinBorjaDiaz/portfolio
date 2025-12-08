@@ -5559,7 +5559,6 @@ export const fiveLetterWords_EN = [
   "gazet",
   "gazon",
   "gazoz",
-  "gconv",
   "gears",
   "gease",
   "geast",

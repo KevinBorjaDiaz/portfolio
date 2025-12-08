@@ -21,15 +21,15 @@
     <strong [ngClass]="'p-2'" style="color:red">{{errorMessage}}</strong>
     
     <!-- Keyboard -->
-    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow1" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> </div>
+    <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> <button *ngFor="let letter of lettersRow1" [ngClass]="[alphabetMap[letter] || '', 'alphabetCell btn btn-secondary d-flex']" (click)="onLetterClick(letter)">{{letter}}</button> </div>
     <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> 
-        <button *ngFor="let letter of lettersRow2" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> 
-        <button *ngIf=" language=== 'ES'" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick('Ñ')">Ñ</button> 
+        <button *ngFor="let letter of lettersRow2" [ngClass]="[alphabetMap[letter] || '', 'alphabetCell btn btn-secondary d-flex']" (click)="onLetterClick(letter)">{{letter}}</button> 
+        <button *ngIf=" language=== 'ES'" [ngClass]="[alphabetMap['Ñ'] || '', 'alphabetCell btn btn-secondary d-flex']" (click)="onLetterClick('Ñ')">Ñ</button> 
     </div>
     
     <div [ngClass]="'d-flex justify-content-center fs-0 alphabetRow'"> 
         <button id="enterButton" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onEnterClick()">{{buttonEnterText}}</button> 
-        <button *ngFor="let letter of lettersRow3" [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onLetterClick(letter)">{{letter}}</button> 
+        <button *ngFor="let letter of lettersRow3" [ngClass]="[alphabetMap[letter] || '','alphabetCell btn btn-secondary d-flex']" (click)="onLetterClick(letter)">{{letter}}</button> 
         <button [ngClass]="'alphabetCell btn btn-secondary d-flex'" (click)="onDeleteClick()">⌫</button> 
     </div>
     <!-- Keyboard End -->

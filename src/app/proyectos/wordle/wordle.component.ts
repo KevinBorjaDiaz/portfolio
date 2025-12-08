@@ -1,10 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { fiveLetterWords_EN, sevenLetterWords_EN, fiveLetterWords_ES, sevenLetterWords_ES, } from './words';
 
+type KeyStatus = 'correct' | 'present' | 'absent' | '';
+
 interface Cell {
   letter: string;
-  status: 'correct' | 'present' | 'absent' | '';
+  status: KeyStatus;
 }
+
+type AlphabetMap = Record<string , KeyStatus>;
 
 @Component({
   selector: 'app-wordle',
@@ -18,19 +22,20 @@ export class WordleComponent {
   lettersRow1: string[] = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
   lettersRow2: string[] = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
   lettersRow3: string[] = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-  wordLength: number = 5;
+  alphabetMap: AlphabetMap = {};
   
   guesses: Cell[][] = [];
   currentGuess: number = 0;
   currentColumn: number = 0;
   maxGuesses: number = 6;
   buttonSize: number = 30;
-
+  
   targetWord: string = '';
   errorMessage: string = '';
   buttonEnterText: string = 'ENTER';
-
-  language: string = 'EN';
+  
+  language: string = localStorage.getItem('wordleLanguage') || 'EN';
+  wordLength: number = parseInt(localStorage.getItem('wordleWordLength')) ||  5;
 
   constructor() {
     this.initializeGuesses();
@@ -55,6 +60,10 @@ export class WordleComponent {
     }
 
     this.getRandomWord();
+  }
+
+  resetAlphabetMap(): void {
+    Object.keys(this.alphabetMap).forEach(x => { this.alphabetMap[x] = '';});
   }
 
   onLetterClick(letter: string): void {
@@ -124,22 +133,42 @@ export class WordleComponent {
     
     const targetLetters = this.targetWord.split('');
     
+    this.manageGuessClasses(guess, currentWord, targetLetters);
+
+    return false;
+  }
+
+  manageGuessClasses(guess: string, currentWord: Cell[], targetLetters: string[]): void {
     for (let i = 0; i < this.wordLength; i++) {
-      currentWord[i].status = 'absent';
+      // Validate letter in alphabet
+      if (!(guess[i] in this.alphabetMap)) {
+        this.alphabetMap[guess[i]] = '';
+      }
+
       if (guess[i] === this.targetWord[i]) {
         currentWord[i].status = 'correct';
         targetLetters[i] = '';
+
+        this.alphabetMap[guess[i]] = 'correct';
       } 
     }
-    
+
     for (let i = 0; i < this.wordLength; i++) {
-      if (targetLetters.includes(guess[i])) {
+      if (targetLetters.includes(guess[i]) && currentWord[i].status !== 'correct') {
         currentWord[i].status = 'present';
         targetLetters[targetLetters.indexOf(guess[i])] = '';
+        
+        if (this.alphabetMap[guess[i]] !== 'correct') {
+          this.alphabetMap[guess[i]] = 'present';
+        }
+      }
+      else if (currentWord[i].status !== 'correct'){
+        currentWord[i].status = 'absent';
+        if (this.alphabetMap[guess[i]] !== 'correct' && this.alphabetMap[guess[i]] !== 'present') {
+          this.alphabetMap[guess[i]] = 'absent';
+        }
       }
     }
-
-    return false;
   }
 
   resetGame(): void {
@@ -147,6 +176,7 @@ export class WordleComponent {
     this.currentGuess = 0;
     this.currentColumn = 0;
     this.initializeGuesses();
+    this.resetAlphabetMap();
   }
 
   updateButtonText() {
@@ -171,6 +201,7 @@ export class WordleComponent {
   getRandomWord(): void {
     const wordList = this.getWordList();
     this.targetWord = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
+    console.log(this.targetWord)
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -197,12 +228,14 @@ export class WordleComponent {
   onLanguageChange(event: any): void {
     const selectedLanguage = event.target.value;
     this.language = selectedLanguage;
+    localStorage.setItem('wordleLanguage', this.language);
     this.resetGame();
   }
 
   onLengthChange(event: any): void {
     const selectedLength = parseInt(event.target.value);
     this.wordLength = selectedLength;
+    localStorage.setItem('wordleWordLength', this.wordLength.toString());
     this.resetGame();
   }
 }
