@@ -13,6 +13,7 @@ import { ConocemeComponent } from './conoceme/conoceme.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { TiktokComponent } from './proyectos/tiktok/tiktok.component';
 import { WordleComponent } from './proyectos/wordle/wordle.component';
+import { TimerComponent } from './proyectos/Timer/timer/timer.component';
 
 const appRoutes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'proyectos', component: ProyectosComponent },
   { path: 'proyectos/tiktok', component: TiktokComponent },
   { path: 'proyectos/wordle', component: WordleComponent },
+  { path: 'proyectos/timer', component: TimerComponent },
 
   { path: 'conoceme', component: ConocemeComponent },
   { path: 'cv', component: CvComponent },
@@ -38,6 +40,7 @@ const appRoutes: Routes = [
     ContactoComponent,
     TiktokComponent,
     WordleComponent,
+    TimerComponent,
   ],
   imports: [
     FormsModule,

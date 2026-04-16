@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h1>Counter: {{ counter }}</h1>
+  <div class="grid">
+    <div class="field small">
+      <label class="info">Phase 1</label>
+      <input type="number" [(ngModel)]="time1" />
+    </div>
+    
+    <div class="field small">
+      <label class="info">Phase 2</label>
+      <input type="number" [(ngModel)]="time2" />
+    </div>
+
+    <div class="field small">
+      <label class="info">Cycles</label>
+      <input type="number" [(ngModel)]="cycles" />
+    </div>
+    
+    <div class="field small">
+      <label class="info">Offset</label>
+      <input type="number" [(ngModel)]="offset" />
+    </div>
+  </div>
+  
+  <button 
+  (click)="running ? stop() : start()"
+  [disabled]="!time1 || !time2"
+  [ngClass]="{ 'disabled': !time1 || !time2 }">
+  {{ running ? 'Stop' : 'Start' }}
+</button>
+
+<div class="info">
+    <h3>{{ waiting ? 'Waiting for new cycle...' : (time | number:'1.0-2') }}</h3>
+    <h3>{{ currentPhase }}</h3>
+  </div>
+
+</div>

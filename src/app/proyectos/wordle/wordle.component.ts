@@ -191,6 +191,8 @@ export class WordleComponent {
     if (this.language === 'ES') {
       return this.wordLength === 5 ? fiveLetterWords_ES : sevenLetterWords_ES;
     }
+
+    return [];;
   }
 
   validateWord(guess: string): boolean {
@@ -201,7 +203,6 @@ export class WordleComponent {
   getRandomWord(): void {
     const wordList = this.getWordList();
     this.targetWord = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
-    console.log(this.targetWord)
   }
 
   onKeyDown(event: KeyboardEvent): void {

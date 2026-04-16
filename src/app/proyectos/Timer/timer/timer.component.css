@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 15px;
+  justify-items: center;
+}
+
+.grid .field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.small{
+  max-width: 250px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.info {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+label{
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
