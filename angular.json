@@ -27,7 +27,6 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
-            "baseHref": "/portfolio/",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
@@ -40,6 +39,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/portfolio/",
               "budgets": [
                 {
                   "type": "initial",
@@ -61,7 +61,7 @@
               "outputHashing": "none"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
