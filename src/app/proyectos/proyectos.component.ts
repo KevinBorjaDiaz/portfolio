@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-proyectos',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
     standalone: false
 })
 export class ProyectosComponent {
-  
+    constructor(public router: Router ) {}
+
+    get showBack(): boolean {
+        return this.router.url.includes('/proyectos/');
+    }
 }

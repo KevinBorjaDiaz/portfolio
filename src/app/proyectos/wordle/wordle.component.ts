@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { fiveLetterWords_EN, sevenLetterWords_EN, fiveLetterWords_ES, sevenLetterWords_ES, } from './words';
 
 type KeyStatus = 'correct' | 'present' | 'absent' | '';
